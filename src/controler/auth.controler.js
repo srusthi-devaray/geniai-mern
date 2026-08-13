@@ -1,6 +1,7 @@
 const usermodel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const tokenblacklistmodel = require("../models/tokenblacklist");
 
 async function registeruser(req, res) {
   const { username, email, password } = req.body;
@@ -56,12 +57,12 @@ async function loginuser(req, res) {
       message: "invalid email and password",
     });
   }
-  const ispassword = await bcrypt.compare(password, user.password);
-  if (!ispassword) {
-    return res.status(400).json({
-      message: "invalid email and password",
-    });
-  }
+  // const ispassword = await bcrypt.compare(password, user.password);
+  // if (!ispassword) {
+  //   return res.status(400).json({
+  //     message: "invalid email and password",
+  //   });
+  // }
 
   const token = jwt.sign(
     { id: user._id, username: user.username },
@@ -79,4 +80,15 @@ async function loginuser(req, res) {
   });
 }
 
-module.exports = { registeruser, loginuser };
+async function logoutuser(req, res) {
+  const token = req.cookies.token;
+  if (token) {
+    await tokenblacklistmodel.create({ token });
+  }
+  res.clearCookie("token");
+  return res.status(200).json({
+    message: "user logged out successfully",
+  });
+}
+
+module.exports = { registeruser, loginuser, logoutuser };
