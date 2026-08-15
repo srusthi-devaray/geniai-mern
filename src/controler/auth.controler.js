@@ -91,4 +91,16 @@ async function logoutuser(req, res) {
   });
 }
 
-module.exports = { registeruser, loginuser, logoutuser };
+async function getmecontroler(req, res) {
+  const user = await usermodel.findById(req.user.id);
+  res.status(200).json({
+    message: "user details fetched successfully",
+    user: {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    },
+  });
+}
+
+module.exports = { registeruser, loginuser, logoutuser, getmecontroler };
