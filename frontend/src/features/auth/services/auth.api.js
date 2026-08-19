@@ -6,40 +6,32 @@ const api = axios.create({
 });
 
 export async function register({ username, email, password }) {
-  try {
-    const responce = await axios.post(
-      "http://localhost:3000/api/auth/register",
-      {
-        username,
-        email,
-        password,
-      },
-      {
-        withCredentials: true,
-      },
-    );
-    return responce.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const responce = await axios.post(
+    "http://localhost:3000/api/auth/register",
+    {
+      username,
+      email,
+      password,
+    },
+    {
+      withCredentials: true,
+    },
+  );
+  return responce.data;
 }
 
 export async function login({ email, password }) {
-  try {
-    const responce = await axios.post(
-      "http://localhost:3000/api/auth/login",
-      {
-        email,
-        password,
-      },
-      {
-        withCredentials: true,
-      },
-    );
-    return responce.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const responce = await axios.post(
+    "http://localhost:3000/api/auth/login",
+    {
+      email,
+      password,
+    },
+    {
+      withCredentials: true,
+    },
+  );
+  return responce.data;
 }
 
 export async function logout() {
@@ -53,7 +45,7 @@ export async function logout() {
 
 export async function getme() {
   try {
-    const responce = await api.get("/api/auth/getme");
+    const responce = await api.get("/api/auth/get-me");
     return responce.data;
   } catch (err) {
     console.log(err);

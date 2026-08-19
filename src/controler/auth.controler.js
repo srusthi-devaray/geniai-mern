@@ -12,7 +12,7 @@ async function registeruser(req, res) {
   }
 
   const isuseralreadyexist = await usermodel.findOne({
-    $or: [{ email }, { password }],
+    $or: [{ email }, { username }],
   });
 
   if (isuseralreadyexist) {
@@ -57,12 +57,12 @@ async function loginuser(req, res) {
       message: "invalid email and password",
     });
   }
-  // const ispassword = await bcrypt.compare(password, user.password);
-  // if (!ispassword) {
-  //   return res.status(400).json({
-  //     message: "invalid email and password",
-  //   });
-  // }
+  const ispassword = await bcrypt.compare(password, user.password);
+  if (!ispassword) {
+    return res.status(400).json({
+      message: "invalid email and password",
+    });
+  }
 
   const token = jwt.sign(
     { id: user._id, username: user.username },
