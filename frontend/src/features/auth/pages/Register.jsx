@@ -13,9 +13,13 @@ function Register() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     seterror("");
+    if (!username.trim() || !email.trim() || !password) {
+      seterror("Please provide username, email, and password");
+      return;
+    }
     const registrationresult = await handleregister({
-      username,
-      email,
+      username: username.trim(),
+      email: email.trim().toLowerCase(),
       password,
     });
     if (registrationresult === true) {
