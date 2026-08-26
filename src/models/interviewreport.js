@@ -8,7 +8,7 @@ const technicalquestionschmea = new mongoose.Schema(
     },
     intention: {
       type: String,
-      required: [true, "intenion is required"],
+      required: [true, "intention is required"],
     },
     answer: {
       type: String,
@@ -49,7 +49,7 @@ const preparationschema = new mongoose.Schema({
     required: [true, "focus is requried"],
   },
   tasks: {
-    type: String,
+    type: [String],
     required: [true, "task is required"],
   },
 });
@@ -91,10 +91,14 @@ const interviewreportschema = new mongoose.Schema(
       min: 0,
       max: 100,
     },
-    technicalquestion: [technicalquestionschmea],
-    behaviouralquestion: [behaviouralquestionschema],
-    skillspag: [skillgapschema],
+    technicalquestions: [technicalquestionschmea],
+    behavioralquestions: [behaviouralquestionschema],
+    skillsgaps: [skillgapschema],
     preparationplan: [preparationschema],
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   {
     timestamps: true,
