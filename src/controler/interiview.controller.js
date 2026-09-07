@@ -33,4 +33,25 @@ async function generateinterviewreportcontroller(req, res) {
 
   console.log("🔥 CONTROLLER RECEIVED:", interviewreportbyai);
 }
-module.exports = { generateinterviewreportcontroller };
+
+async function getinterviewreportbyidcontroller(req, res) {
+  const {interviewid} = req.params;
+  const interivewreport=await interviewreportmodel.findById(interviewid);
+  if (!interivewreport) {
+    return res.status(404).json({ message: "Interview report not found" });
+}
+
+res.status(200).json({
+  message: "Interview report retrieved successfully",
+  interivewreport,
+})
+
+async function getallinterviewreportcontroller(req, res) {
+  const interviewreports = await interviewreportmodel.find({ user: req.user.id });
+  res.status(200).json({
+    message: "Interview reports retrieved successfully",
+    interviewreports,
+  });
+}
+
+module.exports = { generateinterviewreportcontroller, getinterviewreportbyidcontroller, getallinterviewreportcontroller }
