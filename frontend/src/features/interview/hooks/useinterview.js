@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { InterviewContext } from "../interivew.context.jsx";
 
 export const useinterview = () => {
-  const context = usecontext(interviewContext);
+  const context = useContext(InterviewContext);
 
   if (!context) {
     throw new Error("useinterview must be used within an InterviewProvider");
@@ -19,16 +19,17 @@ export const useinterview = () => {
   const generateReport = async ({
     jobdescription,
     selfdescription,
-    resumefil,
+    resumefile: resumefil,
   }) => {
     setloading(true);
     try {
       const response = await generateinterviewreport({
         jobdescription,
         selfdescription,
-        resumefil,
+        resumefile: resumefil,
       });
-      setreport(response.interivewreport);
+      setreport(response.interviewreport);
+      return response.interviewreport;
     } catch (error) {
       console.error("Error generating interview report:", error);
     } finally {
@@ -40,7 +41,7 @@ export const useinterview = () => {
     setloading(true);
     try {
       const response = await getinterviewreportbyid(interviewid);
-      setreport(response.interivewreport);
+      setreport(response.interviewreport);
     } catch (error) {
       console.error("Error fetching interview report by ID:", error);
     } finally {
@@ -53,6 +54,7 @@ export const useinterview = () => {
     try {
       const response = await getallinterviewreports();
       setreports(response.interivewreports);
+      return response.interivewreport;
     } catch (error) {
       console.error("Error fetching all interview reports:", error);
     } finally {
