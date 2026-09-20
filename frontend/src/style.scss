@@ -1,30 +1,244 @@
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0b0f19;
+  color: white;
+
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 40px;
+
+  background: #111827;
+
+  border: 1px solid #263147;
+
+  border-radius: 22px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Heading */
+
+.login-container h1 {
+  margin: 0 0 8px;
+
+  color: white;
+
+  font-size: 36px;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.login-subtitle {
+  margin: 0 0 32px;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+/* Form */
+
+.login-container form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+
+/* Labels */
+
+.login-container label {
+  margin-bottom: 8px;
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* Inputs */
+
+.login-container input {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 14px;
+
+  box-sizing: border-box;
+
+  background: #0b1220;
+
+  border: 1px solid #273449;
+
+  border-radius: 11px;
+
+  color: white;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.login-container input::placeholder {
+  color: #64748b;
+}
+
+.login-container input:focus {
+  border-color: #6366f1;
+
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+
+/* Login button */
+
+.login-container button {
+  width: 100%;
+
+  height: 50px;
+
+  margin-top: 5px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #6366f1;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.login-container button:hover {
+  background: #7375f5;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
+}
+
+.login-container button:active {
+  transform: translateY(0);
+}
+
+
+/* Register text */
+
+.login-register {
+  margin-top: 22px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+.login-register a {
+  color: #818cf8;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  margin-left: 5px;
+}
+
+.login-register a:hover {
+  color: #a5b4fc;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+  .login-page {
+    padding: 20px;
+  }
+
+  .login-container {
+    padding: 30px 22px;
+  }
+
+  .login-container h1 {
+    font-size: 30px;
+  }
+}
+
 .home {
   min-height: 100vh;
-  padding: 60px 8%;
+  padding: 50px 7%;
   background: #0b0f19;
   color: white;
   box-sizing: border-box;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
 .home-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 42px;
 }
 
 .badge {
   display: inline-block;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 9px 17px;
+  border-radius: 30px;
+
   background: #171c35;
+  border: 1px solid #252d52;
+
   color: #a5b4fc;
   font-size: 14px;
-  margin-bottom: 20px;
+
+  margin-bottom: 18px;
 }
 
 .home-header h1 {
   margin: 0;
-  font-size: 48px;
+
+  font-size: 50px;
+  line-height: 1.15;
   font-weight: 700;
+
+  letter-spacing: -1.5px;
 }
 
 .home-header h1 span {
@@ -32,58 +246,143 @@
 }
 
 .home-header p {
-  margin-top: 15px;
+  max-width: 650px;
+
+  margin: 16px auto 0;
+
   color: #94a3b8;
-  font-size: 17px;
+
+  font-size: 16px;
+  line-height: 1.6;
 }
 
+
+/* =========================
+   MAIN FORM
+========================= */
+
 .interview-input-group {
-  max-width: 1100px;
+  max-width: 1150px;
+
   margin: auto;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
+  grid-template-columns: 1.15fr 0.85fr;
+
+  gap: 22px;
+
+  padding: 22px;
+
+  background: #101624;
+
+  border: 1px solid #202a3b;
+
+  border-radius: 24px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35);
 }
+
+
+/* =========================
+   LEFT + RIGHT CARDS
+========================= */
 
 .left,
 .right {
   background: #111827;
-  border: 1px solid #1f2937;
+
+  border: 1px solid #263147;
+
   border-radius: 18px;
+
   padding: 25px;
+
   box-sizing: border-box;
 }
 
+
+/* =========================
+   JOB DESCRIPTION
+========================= */
+
 .left {
-  min-height: 350px;
+  min-height: 460px;
+
+  display: flex;
+  flex-direction: column;
 }
 
-label {
-  display: block;
-  margin-bottom: 12px;
+.jobdescription {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-  color: #e5e7eb;
+  margin-bottom: 14px;
+
+  color: #f1f5f9;
+
   font-size: 16px;
   font-weight: 600;
 }
 
+.left textarea {
+  flex: 1;
+
+  min-height: 360px;
+}
+
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #e5e7eb;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   TEXTAREA
+========================= */
+
 textarea {
   width: 100%;
+
   min-height: 230px;
 
   padding: 15px;
+
   box-sizing: border-box;
 
   background: #0b1220;
+
   border: 1px solid #273449;
-  border-radius: 12px;
+
+  border-radius: 13px;
 
   color: white;
+
+  font-family: inherit;
+
   font-size: 14px;
 
+  line-height: 1.6;
+
   resize: vertical;
+
   outline: none;
+
+  transition: all 0.2s ease;
 }
 
 textarea::placeholder {
@@ -92,18 +391,38 @@ textarea::placeholder {
 
 textarea:focus {
   border-color: #6366f1;
+
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.right {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+
+/* =========================
+   INPUT GROUP
+========================= */
+
 .input-group {
-  margin-bottom: 25px;
+  margin-bottom: 0;
 }
 
 .input-group p {
-  margin-top: 0;
-  margin-bottom: 15px;
+  margin: 0 0 12px;
 
   color: #e5e7eb;
-  font-size: 18px;
+
+  font-size: 17px;
   font-weight: 600;
 }
 
@@ -113,78 +432,188 @@ textarea:focus {
   margin-top: 5px;
 
   color: #64748b;
+
   font-size: 12px;
+
   font-weight: normal;
 }
 
+
+/* =========================
+   RESUME UPLOAD
+========================= */
+
 .file-label {
-  height: 120px;
+  height: 145px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
-  border: 2px dashed #334155;
+  border: 1.5px dashed #3b465d;
+
   border-radius: 14px;
 
   background: #0b1220;
+
   color: #a5b4fc;
 
   cursor: pointer;
 
-  transition: 0.2s;
+  transition: all 0.25s ease;
 }
 
 .file-label:hover {
   border-color: #6366f1;
+
   background: #111936;
+
+  transform: translateY(-1px);
 }
+
+
+/* =========================
+   ABOUT YOURSELF
+========================= */
 
 .right textarea {
   min-height: 120px;
 }
 
+
+/* =========================
+   BUTTON
+========================= */
+
 .primary-button {
   width: 100%;
+
+  margin-top: auto;
 
   padding: 15px;
 
   border: none;
-  border-radius: 12px;
+
+  border-radius: 13px;
 
   background: #6366f1;
+
   color: white;
 
   font-size: 15px;
+
   font-weight: 600;
 
   cursor: pointer;
 
-  transition: 0.2s;
+  transition: all 0.25s ease;
 }
 
 .primary-button:hover {
-  background: #4f46e5;
+  background: #7375f5;
+
   transform: translateY(-2px);
+
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
+}
+
+.primary-button:active {
+  transform: translateY(0);
 }
 
 .primary-button:disabled {
   opacity: 0.6;
+
   cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
 }
 
-@media (max-width: 800px) {
+
+/* =========================
+   SELECTED FILE
+========================= */
+
+.selected-file {
+  margin-top: 10px;
+
+  padding: 9px 12px;
+
+  background: #0b1220;
+
+  border: 1px solid #273449;
+
+  border-radius: 9px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .home {
+    padding: 40px 20px;
+  }
 
   .interview-input-group {
     grid-template-columns: 1fr;
   }
 
+  .left {
+    min-height: auto;
+  }
+
+  .left textarea {
+    min-height: 250px;
+  }
+}
+
+
+@media (max-width: 600px) {
   .home {
-    padding: 40px 20px;
+    padding: 30px 15px;
   }
 
   .home-header h1 {
     font-size: 36px;
   }
 
+  .home-header p {
+    font-size: 14px;
+  }
+
+  .interview-input-group {
+    padding: 12px;
+
+    border-radius: 18px;
+  }
+
+  .left,
+  .right {
+    padding: 18px;
+  }
+}
+
+.right {
+  background: #111827 !important;
+  border: 1px solid #263147 !important;
+}
+
+.file-label {
+  background: #0b1220 !important;
 }

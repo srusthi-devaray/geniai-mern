@@ -10,118 +10,157 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-console.log("🔥 USING ai.services.js");
-
 const interivewreportschema = z.object({
   matchscore: z
     .number()
-    .describe(
-      "the score between 0 to 100 indicating how well the candidate matches the job description",
-    ),
+    .min(0)
+    .max(100)
+    .describe("ATS match score between 0 and 100"),
 
-  technicalquestions: z
-    .array(
-      z.object({
-        question: z
-          .string()
-          .describe("The technical question to be asked in the interview"),
-        intention: z
-          .string()
-          .describe("the intention of interivew   behind asking the question"),
-        answer: z
-          .string()
-          .describe(
-            "how to answer this question what points to be covered in the answer",
-          ),
-      }),
-    )
-    .describe(
-      "technical questions to be asked in the interview alongwith the intention behind asking the question and how to answer it",
-    ),
+  technicalquestions: z.array(
+    z.object({
+      question: z.string(),
+      intention: z.string(),
+      answer: z.string(),
+    }),
+  ),
 
-  behavioralquestions: z
-    .array(
-      z.object({
-        question: z
-          .string()
-          .describe("The behavioral question to be asked in the interview"),
-        intention: z
-          .string()
-          .describe("the intention of interivew   behind asking the question"),
-        answer: z
-          .string()
-          .describe(
-            "how to answer this question what points to be covered in the answer",
-          ),
-      }),
-    )
-    .describe(
-      "behavioral questions to be asked in the interview alongwith the intention behind asking the question and how to answer it",
-    ),
+  behavioralquestions: z.array(
+    z.object({
+      question: z.string(),
+      intention: z.string(),
+      answer: z.string(),
+    }),
+  ),
 
-  skillsgaps: z
-    .array(
-      z.object({
-        skill: z.string().describe("the skill which the  candidate is lacking"),
-        severity: z
-          .enum(["low", "medium", "high"])
-          .describe("the severity of the skill gap"),
-      }),
-    )
-    .describe(
-      "list of skill gap in the candidate's profile along with there skills",
-    ),
+  skillsgaps: z.array(
+    z.object({
+      skill: z.string(),
+      severity: z.enum(["low", "medium", "high"]),
+    }),
+  ),
 
-  preparationplan: z
-    .array(
-      z.object({
-        day: z
-          .number()
-          .describe("the day number of the preparation plan starting from 1"),
-        focus: z
-          .string()
-          .describe("the focus was was preparation of an interivew"),
-        tasks: z
-          .array(z.string())
-          .describe("the tasks to be completed on that day"),
-      }),
-    )
-    .describe(
-      "the preparation plan for the candidate to prepare for the interview along with the focus and tasks to be completed on that day",
-    ),
-  title: z.string().describe("the title of the interview report"),
+  preparationplan: z.array(
+    z.object({
+      day: z.number(),
+      focus: z.string(),
+      tasks: z.array(z.string()),
+    }),
+  ),
+
+  title: z.string(),
 });
-
 async function generateinterviewreport({
   resume,
   selfdescription,
   jobdescription,
 }) {
-  const prompt = `Generate an interview report for a candidate based on the following information:
-Resume: ${resume}
-Self Description: ${selfdescription}
-Job Description: ${jobdescription}`;
+  const prompt = `Generate a detailed AI interview preparation report for the candidate.
+
+You MUST return the report using exactly these fields:
+
+1. matchscore
+- A numerical ATS match score from 0 to 100.
+- Compare the candidate's resume with the job description.
+
+2. technicalquestions
+- Generate 5 technical interview questions.
+- Questions must be based on the candidate's resume and the job description.
+- For every question provide:
+  - question
+  - intention
+  - answer
+- The answer should be a good sample answer the candidate can use for preparation.
+
+3. behavioralquestions
+- Generate 5 behavioral interview questions.
+- For every question provide:
+  - question
+  - intention
+  - answer
+- Answers should be realistic and personalized to the candidate.
+
+4. skillsgaps
+- Identify skills required by the job description that the candidate needs to improve.
+- For every skill provide:
+  - skill
+  - severity: low, medium, or high
+
+5. preparationplan
+- Create a 7-day interview preparation roadmap.
+- For every day provide:
+  - day
+  - focus
+  - tasks
+
+6. title
+- Create a suitable title for the interview report.
+
+IMPORTANT:
+Do not use fields such as:
+candidateName,
+positionApplied,
+overallMatchScore,
+skillAlignment,
+projectReview,
+softSkillsAssessment,
+keyStrengths,
+growthAreas,
+recommendedInterviewQuestions.
+
+Use ONLY the fields defined in the requested structure.
+
+Candidate Resume:
+${resume}
+
+Self Description:
+${selfdescription}
+
+Job Description:
+${jobdescription}`;
 
   console.log("🔥 INTERVIEW REPORT SERVICE CALLED");
   console.log("PROMPT:", prompt);
-  const responce = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      jsonSchema: zodToJsonSchema(interivewreportschema),
-    },
-  });
-  const result = JSON.parse(responce.text);
-  console.log("🔥 GEMINI RESULT:");
-  console.log(JSON.stringify(result, null, 2));
 
-  console.log("INTERVIEW REPORT AI RESULT:", result);
+  const models = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash"];
 
-  return result;
+  for (const model of models) {
+    try {
+      console.log(`🔥 TRYING MODEL: ${model}`);
 
-  console.log(JSON.parse(responce.text));
-  return JSON.parse(responce.text);
+      const responce = await ai.models.generateContent({
+        model: model,
+        contents: prompt,
+        config: {
+          responseMimeType: "application/json",
+          jsonSchema: zodToJsonSchema(interivewreportschema),
+        },
+      });
+
+      console.log(`✅ SUCCESS WITH MODEL: ${model}`);
+
+      const result = JSON.parse(responce.text);
+
+      console.log("🔥 GEMINI RESULT:");
+      console.log(JSON.stringify(result, null, 2));
+
+      return result;
+    } catch (error) {
+      console.error(`❌ ${model} FAILED:`, error.message);
+
+      if (error.status === 503) {
+        console.log(`⚠️ ${model} is currently unavailable.`);
+        console.log("➡️ Trying the next model...");
+        continue;
+      }
+
+      throw error;
+    }
+  }
+
+  throw new Error(
+    "All Gemini models are currently unavailable. Please try again later.",
+  );
 }
 
 module.exports = generateinterviewreport;

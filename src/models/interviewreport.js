@@ -27,11 +27,9 @@ const skillgapschema = new mongoose.Schema(
       required: [true, "skills required"],
     },
     severity: {
-      type: {
-        type: String,
-        enum: ["low", "medium", "high"],
-        required: [true, "sevirity is required"],
-      },
+      type: String,
+      enum: ["low", "medium", "high"],
+      required: [true, "sevirity is required"],
     },
   },
   {
@@ -41,7 +39,7 @@ const skillgapschema = new mongoose.Schema(
 
 const preparationschema = new mongoose.Schema({
   day: {
-    type: Number,
+    type: String,
     required: [true, "day is required"],
   },
   focus: {

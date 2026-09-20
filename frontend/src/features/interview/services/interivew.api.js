@@ -1,10 +1,8 @@
 import axios from "axios";
-
 const api = axios.create({
   baseURL: "http://localhost:3000/api/interview",
   withCredentials: true,
 });
-
 export const generateinterviewreport = async ({
   jobdescription,
   selfdescription,
@@ -14,7 +12,6 @@ export const generateinterviewreport = async ({
   formData.append("jobdescription", jobdescription);
   formData.append("selfdescription", selfdescription);
   formData.append("resume", resumefile);
-
   const response = await api.post("/", formData, {
     headers: {
       "content-type": "multipart/form-data",
