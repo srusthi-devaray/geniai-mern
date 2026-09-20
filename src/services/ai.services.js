@@ -119,14 +119,14 @@ ${selfdescription}
 Job Description:
 ${jobdescription}`;
 
-  console.log("🔥 INTERVIEW REPORT SERVICE CALLED");
+  console.log(" INTERVIEW REPORT SERVICE CALLED");
   console.log("PROMPT:", prompt);
 
   const models = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash"];
 
   for (const model of models) {
     try {
-      console.log(`🔥 TRYING MODEL: ${model}`);
+      console.log(` TRYING MODEL: ${model}`);
 
       const responce = await ai.models.generateContent({
         model: model,
@@ -137,20 +137,20 @@ ${jobdescription}`;
         },
       });
 
-      console.log(`✅ SUCCESS WITH MODEL: ${model}`);
+      console.log(`SUCCESS WITH MODEL: ${model}`);
 
       const result = JSON.parse(responce.text);
 
-      console.log("🔥 GEMINI RESULT:");
+      console.log(" GEMINI RESULT:");
       console.log(JSON.stringify(result, null, 2));
 
       return result;
     } catch (error) {
-      console.error(`❌ ${model} FAILED:`, error.message);
+      console.error(` ${model} FAILED:`, error.message);
 
       if (error.status === 503) {
-        console.log(`⚠️ ${model} is currently unavailable.`);
-        console.log("➡️ Trying the next model...");
+        console.log(` ${model} is currently unavailable.`);
+        console.log(" Trying the next model...");
         continue;
       }
 

@@ -1,6 +1,4 @@
-/* =========================
-   LOGIN / REGISTER PAGE
-========================= */
+
 
 main {
   min-height: 100vh;
@@ -15,11 +13,6 @@ main {
 
   background: #f5f7fb;
 }
-
-
-/* =========================
-   FORM CARD
-========================= */
 
 .form-container {
   width: 100%;
@@ -39,9 +32,6 @@ main {
 }
 
 
-/* =========================
-   HEADING
-========================= */
 
 .form-container h1 {
   margin: 0 0 42px;
@@ -58,10 +48,6 @@ main {
 }
 
 
-/* =========================
-   FORM
-========================= */
-
 .form-container form {
   display: flex;
 
@@ -71,20 +57,12 @@ main {
 }
 
 
-/* =========================
-   INPUT GROUP
-========================= */
-
 .input-group {
   display: flex;
 
   flex-direction: column;
 }
 
-
-/* =========================
-   LABEL
-========================= */
 
 .input-group label {
   margin-bottom: 9px;
@@ -96,10 +74,6 @@ main {
   font-weight: 600;
 }
 
-
-/* =========================
-   INPUT
-========================= */
 
 .input-group input {
   width: 100%;
@@ -126,14 +100,13 @@ main {
 }
 
 
-/* Placeholder */
 
 .input-group input::placeholder {
   color: #a1a7b3;
 }
 
 
-/* Input focus */
+
 
 .input-group input:focus {
   border-color: #6366f1;
@@ -141,10 +114,6 @@ main {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-
-/* =========================
-   BUTTON
-========================= */
 
 .form-container .primary-button {
   width: 100%;
@@ -171,8 +140,6 @@ main {
 }
 
 
-/* Button hover */
-
 .form-container .primary-button:hover {
   background: #5558e8;
 
@@ -181,10 +148,6 @@ main {
   box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
 }
 
-
-/* =========================
-   BOTTOM TEXT
-========================= */
 
 .form-container > p {
   margin-top: 25px;
@@ -196,8 +159,6 @@ main {
   text-align: center;
 }
 
-
-/* Register / Login link */
 
 .form-container > p a {
   margin-left: 5px;
@@ -217,21 +178,11 @@ main {
 }
 
 
-/* =========================
-   LOADING PAGE
-========================= */
-
 main > h1 {
   color: #202330;
 
   font-size: 28px;
 }
-
-
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 600px) {
 
   main {
