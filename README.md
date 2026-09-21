@@ -57,7 +57,6 @@ Provides a learning roadmap based on the identified skill gaps.
 
 ### Frontend
 - React.js
-- JavaScript
 - SCSS
 - Vite
 - React Router
@@ -72,7 +71,6 @@ Provides a learning roadmap based on the identified skill gaps.
 
 ### AI
 - Google Gemini API
-- Google Generative AI SDK for Node.js
 
 ### Other Technologies
 - REST APIs
