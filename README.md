@@ -36,12 +36,6 @@ Generates technical interview questions based on:
 - Resume
 - Job description
 - Candidate's skills
-- Project experience
-
-Each question can include:
-- Question
-- Intention behind the question
-- Suggested approach for answering
 
 ### 🗣️ Behavioral Questions
 Provides behavioral interview questions to help candidates prepare for questions related to:
